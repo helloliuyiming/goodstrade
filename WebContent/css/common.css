@@ -1,0 +1,160 @@
+body{
+    background: snow;
+
+}
+.container-fluid{
+    padding:0 150px
+}
+
+#header-title{
+	margin-top: 1.25rem;
+}
+#search-input{
+	margin-top: 0.625rem;
+}
+#side-avatar{
+    width: 40%;
+}
+#info-panel{
+    width: 100%;
+    height: 40%;
+
+}
+.info-list{
+    list-style: none;
+    padding: 0 10px;
+    height: 70%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+.info-item a{
+    width: 100%;
+}
+.order-info-badge{
+    position: absolute;
+    top: 0;
+    right: 0
+}
+main{
+    margin-top: 30px;
+}
+#block-index{
+    margin-top: 30px;
+}
+#category ul{
+
+}
+
+.home-block .goods-outline{
+    padding: 0 5px;
+}
+
+.goods-outline{
+	margin: 0 20px;
+	width: 200px;
+	position: relative;
+}
+.goods-outline a:link,.goods-outline a:visited,.goods-outline a:hover{
+	text-decoration: none;
+	color: #000000;
+}
+.goods-outline-action{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    visibility: hidden;
+
+}
+.btn-unlike{
+	position: absolute;
+	top: 2%;
+	right: 2%;
+	visibility: hidden;
+}
+.goods-outline-like{
+	bottom: 14%;
+	position: absolute;
+	opacity: 1;
+	background: white;
+	width: 100%;
+	box-shadow:0 0 20px #FFFFFF inset;
+
+	padding: 3% 5%;
+	visibility: hidden;
+}
+.goods-outline:hover .goods-outline-action{
+    visibility: visible;
+}
+
+.goods-outline:hover .btn-unlike{
+    visibility: visible;
+}
+
+.goods-outline:hover .goods-outline-like{
+    visibility: visible;
+}
+
+
+.goods-outline-img{
+    width: 100%;
+}
+.goods-outline-title{
+    margin-top: 20px;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    display:-webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:2;
+}
+.goods-outline-title .tag{
+    color: white;
+    background: red;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+.goods-outline-price{
+    color: red;
+    margin-bottom: 0;
+}
+.goods-outline-origin{
+    text-align: right;
+    font-size: 10px;
+    margin: 0 0 5px;
+}
+
+
+footer{
+    margin: 50px 100px;
+}
+
+#goods-block{
+	flex-wrap: wrap;
+}
+
+#personal-profile{
+    margin: 20px 30px;
+}
+
+
+/*post.html*/
+.add-picture{
+
+}
+.add-picture-btn{
+    height: 100%
+}
+
+.small-preview-picture{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+}
+.close-picture{
+    position: absolute;
+    right: 0;
+    top: 0;
+    visibility: hidden;
+}

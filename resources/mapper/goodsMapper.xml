@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.lym.dao.GoodsDao">
+
+	<resultMap type="me.lym.entity.Goods" id="goodsMap">
+		<id column="g_id" jdbcType="INTEGER" property="goodsId"/>
+		<result column="g_name" jdbcType="VARCHAR" property="goodsName"/>
+		<result column="g_price" jdbcType="FLOAT" property="goodsPrice"/>
+		<result column="g_image" jdbcType="VARCHAR" property="goodsImage"/>
+		<result column="g_freight" jdbcType="FLOAT" property="goodsFreight"/>
+		<result column="g_buytime" jdbcType="TIMESTAMP" property="goodsBuytime"/>
+		<result column="g_posttime" jdbcType="TIMESTAMP" property="goodsPosttime"/>
+		<result column="g_buyof" jdbcType="VARCHAR" property="goodsBuyof"/>
+		<result column="g_broken" jdbcType="VARCHAR" property="goodsBroken"/>
+		<result column="g_details" jdbcType="LONGVARCHAR" property="goodsDetails"/>
+		<result column="g_uid" jdbcType="INTEGER" property="goodsUid"/>
+		<result column="g_sort" jdbcType="VARCHAR" property="goodsSort"/>
+		<result column="g_visitor" jdbcType="VARCHAR" property="goodsVisitor"/>
+		<result column="g_status" jdbcType="VARCHAR" property="goodsStatus"/>
+	</resultMap>
+	
+	<insert id="addGoods">
+		insert into goods(g_name,g_price,g_image,g_freight,g_buytime,g_buyof,g_broken,g_details,g_uid,g_sort,g_visitor,g_posttime,g_status)
+		values(#{goodsName},#{goodsPrice},#{goodsImage},#{goodsFreight},#{goodsBuytime},#{goodsBuyof},#{goodsBroken},#{goodsDetails},#{goodsUid},#{goodsSort},#{goodsVisitor},#{goodsPosttime},#{goodsStatus})
+	</insert>
+	
+	<delete id="deleteGoods">
+		delete from goods where g_id = #{goodsId}
+	</delete>
+	
+	<delete id="deleteGoodsById">
+		delete from goods where g_id = #{goodsId}
+	</delete>
+	
+	<update id="updateGoods">
+		update goods set g_name = #{goodsName},g_price = #{goodsPrice},g_image = #{goodsImage},g_freight = #{goodsFreight},
+		g_buytime = #{goodsBuytime},g_buyof = #{goodsBuyof},g_broken = #{goodsBroken},
+		g_details = #{goodsDetails},g_uid = #{goodsUid},g_sort = #{goodsSort},g_visitor = #{goodsVisitor},
+		g_status = #{goodsStatus}
+		where g_id = #{goodsId}
+	</update>
+	
+	<select id="queryById" resultMap="goodsMap">
+		select * from goods where g_id = #{id}
+	</select>
+	
+	<select id="queryUserAllGoods" resultMap="goodsMap">
+		select * from goods where g_uid = #{goodsUid}
+	</select>
+	
+	<select id="queryUserAllGoodsAndLimit" resultMap="goodsMap">
+		select * from goods where g_uid = #{userId} limit #{limit} offset #{offset}
+	</select>
+	
+	<select id="queryByKey" resultMap="goodsMap">
+		select * from goods where g_name like %#{key}%
+	</select>
+	
+	<select id="queryByKeyAndLimit" resultMap="goodsMap">
+		select * from goods where g_name like %#{key}% limit #{limit} offset #{offset}
+	</select>
+	
+	
+	<select id="queryAll" resultMap="goodsMap">
+		select * from goods
+	</select>
+	
+	<select id="queryAllAndLimit" resultMap="goodsMap">
+		select * from goods limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="queryAndSortByHot" resultMap="goodsMap">
+		select * from goods order by g_visitor limit #{param1} offset #{param2}
+	</select>
+	
+	<select id="queryAndSortByNew" resultMap="goodsMap">
+		select * from goods order by g_posttime desc limit #{param1} offset #{param2}
+	</select>
+
+
+
+</mapper>

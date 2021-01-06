@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.lym.dao.OrderDao">
+	<insert id="newOrder" useGeneratedKeys="true" keyProperty="id">
+		insert into order_info(user_id,goods_id,create_time,close_time,money,freight,receiver_address,status,payment_method,delivery_method,express_company,express_code) 
+					values(#{userId},#{goodsId},#{createTime},#{closeTime},#{money},#{freight},#{receiverAddress},#{status},#{paymentMethod},#{deliveryMethod},#{expressCompany},#{expressCode})
+	</insert>
+	
+	<update id="updateOrder">
+		update order_info set user_id = #{userId},goods_id = #{goodsId},create_time = #{createTime},close_time = #{closeTime},
+		money = #{money},freight = #{freight},receiver_address = #{receiverAddress},status = #{status},payment_method=#{paymentMethod},
+		delivery_method=#{deliveryMethod},express_company=#{expressCompany},express_code=#{expressCode}
+		where id = #{id}
+	</update>
+	
+	<update id="updateStatus">
+		update order_info set status = #{param2} where id = #{param1}
+	</update>
+	
+	<select id="queryById" resultType="me.lym.entity.Order">
+		select * from order_info where id = #{param1}
+	</select>
+	
+	<select id="queryByUserId" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1}
+	</select>
+	
+	<select id="queryByUserIdWithLimit" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} limit #{param2} offset #{param3}
+	</select>
+	
+	<select id="queryByUserIdWithOrderByTime" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} order by create_time
+	</select>
+	
+	<select id="queryByUserIdWithDeOrderByTime" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} order by create_time desc
+	</select>
+	
+	<select id="queryByUserIdWithOrderByNum" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1}  order by money
+	</select>
+	
+	<select id="queryByUserIdWithDeOrderByNum" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1}  order by money desc
+	</select>
+	
+	<select id="queryByUserIdWithOrderByTimeAndLimit" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} order by create_time  limit #{param2} offset #{param3}
+	</select>
+	
+	<select id="queryByUserIdWithOrderByNumAndLimit" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} order by money  limit #{param2} offset #{param3}
+	</select>
+
+	<select id="queryByUserIdWithDeOrderByTimeAndLimit" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} order by create_time desc limit #{param2} offset #{param3}
+	</select>
+	
+	<select id="queryByUserIdWithDeOrderByNumAndLimit" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} order by money desc limit #{param2} offset #{param3}
+	</select>
+
+	<select id="queryOrderDetail" resultType="map">
+	select
+			order_info.id as order_id, order_info.goods_id as goods_id, order_info.user_id as user_id, order_info.create_time as create_time,
+			order_info.close_time as close_time, order_info.payment_method as payment_method, order_info.delivery_method as delivery_method,
+			order_info.express_company as express_company, order_info.express_code as express_code, order_info.money as money, order_info.freight as freight,
+			order_info.receiver_address as receiver_address, order_info.status as status, goods.g_name as goods_name, goods.g_image as goods_image,order_info.seller_id as seller_id
+ from order_info,goods where order_info.goods_id=goods.g_id and order_info.id = #{param1}
+	</select>
+	
+	<select id="queryOrderDetailByCustomerUserId" resultType="map">
+		select
+			order_info.id as order_id, order_info.goods_id as goods_id, order_info.user_id as user_id, order_info.create_time as create_time,
+			order_info.close_time as close_time, order_info.payment_method as payment_method, order_info.delivery_method as delivery_method,
+			order_info.express_company as express_company, order_info.express_code as express_code, order_info.money as money, order_info.freight as freight,
+			order_info.receiver_address as receiver_address, order_info.status as status, goods.g_name as goods_name, goods.g_image as goods_image,order_info.seller_id as seller_id
+ from order_info,goods where order_info.goods_id=goods.g_id and order_info.user_id = #{param1}
+	</select>
+
+	<select id="queryByGoodsId" resultType="me.lym.entity.Order">
+		select * from order_info where goods_id=#{param1}
+	</select>
+
+	<select id="queryOrderDetailBySellerUserId" resultType="map">
+		select
+			order_info.id as order_id, order_info.goods_id as goods_id, order_info.user_id as user_id, order_info.create_time as create_time,
+			order_info.close_time as close_time, order_info.payment_method as payment_method, order_info.delivery_method as delivery_method,
+			order_info.express_company as express_company, order_info.express_code as express_code, order_info.money as money, order_info.freight as freight,
+			order_info.receiver_address as receiver_address, order_info.status as status, goods.g_name as goods_name, goods.g_image as goods_image,order_info.seller_id as seller_id
+ 		from order_info,goods where order_info.goods_id=goods.g_id and order_info.seller_id = #{param1}
+	</select>
+	<select id="queryByUserIdAndGoodsId" resultType="me.lym.entity.Order">
+		select * from order_info where user_id = #{param1} and goods_id = #{param2}
+	</select>
+
+</mapper>
